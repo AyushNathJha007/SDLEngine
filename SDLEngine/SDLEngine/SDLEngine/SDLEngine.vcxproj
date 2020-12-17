@@ -361,6 +361,8 @@
     <ClInclude Include="SDL2Libs\include\SDL_video.h" />
     <ClInclude Include="SDL2Libs\include\SDL_vulkan.h" />
     <ClInclude Include="src\Constants.h" />
+    <ClInclude Include="src\ECS_Component.h" />
+    <ClInclude Include="src\ECS_Entity.h" />
     <ClInclude Include="src\Game.h" />
   </ItemGroup>
   <ItemGroup>
