@@ -360,6 +360,8 @@
     <ClInclude Include="SDL2Libs\include\SDL_version.h" />
     <ClInclude Include="SDL2Libs\include\SDL_video.h" />
     <ClInclude Include="SDL2Libs\include\SDL_vulkan.h" />
+    <ClInclude Include="src\Constants.h" />
+    <ClInclude Include="src\Game.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libFLAC-8.dll" />
@@ -582,6 +584,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="libs\imgui\imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Main.cpp">
