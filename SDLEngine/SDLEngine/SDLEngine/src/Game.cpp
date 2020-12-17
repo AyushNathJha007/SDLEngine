@@ -3,11 +3,15 @@
 #include<iostream>
 #include "./Game.h"
 #include "./Constants.h"
+#include "../libs/glm/glm.hpp"
 using namespace std;
-float projectile_pos_x = 0.0f;
+/*float projectile_pos_x = 0.0f;
 float projectile_pos_y = 0.0f;
-float projectile_vel_x = 0.3f;
-float projectile_vel_y =0.3f;
+float projectile_vel_x = 10.0f;
+float projectile_vel_y =10.0f;*/
+
+glm::vec2 projectile_pos = glm::vec2(0.0f, 0.0f);
+glm::vec2 projectile_vel = glm::vec2(10.0f, 10.0f);
 
 bool Game::IsRunning() const
 {
@@ -68,8 +72,22 @@ void Game::InputProcessing()
 
 void Game::UpdateGame()
 {
-	projectile_pos_x += projectile_vel_x;
-	projectile_pos_y += projectile_vel_y;
+	//while (!SDL_TICKS_PASSED(SDL_GetTicks(), this->ticksLastFrame + TARGET_FRAME_TIME));
+
+	int timeToWait = TARGET_FRAME_TIME - (SDL_GetTicks() - this->ticksLastFrame);
+
+	if (timeToWait > 0 && timeToWait < TARGET_FRAME_TIME)
+	{
+		SDL_Delay(timeToWait);
+	}
+
+	float deltaTime = (SDL_GetTicks() - this->ticksLastFrame) / 1000.0f;
+	//Clamp DeltaTime
+	deltaTime = (deltaTime > 0.05f) ? 0.05f : deltaTime;
+	this->ticksLastFrame = SDL_GetTicks();
+	/*projectile_pos_x += projectile_vel_x*deltaTime;
+	projectile_pos_y += projectile_vel_y*deltaTime;*/
+	projectile_pos += projectile_vel * deltaTime;
 }
 
 void Game::Render()
@@ -78,8 +96,8 @@ void Game::Render()
 	SDL_RenderClear(this->renderer);
 
 	SDL_Rect Projectile{
-		(int)projectile_pos_x,
-		(int)projectile_pos_y,
+		(int)projectile_pos.x,
+		(int)projectile_pos.y,
 		10,
 		10
 	};

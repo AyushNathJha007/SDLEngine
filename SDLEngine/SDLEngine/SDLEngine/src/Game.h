@@ -9,6 +9,7 @@
 class Game {
 private:
 	bool isRunning;
+	int ticksLastFrame;
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 public:

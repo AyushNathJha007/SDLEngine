@@ -7,8 +7,8 @@ Release\imgui_sdl.obj : warning LNK4042: object specified more than once; extras
 Release\imgui_widgets.obj : warning LNK4042: object specified more than once; extras ignored
 Release\Main.obj : warning LNK4042: object specified more than once; extras ignored
   Generating code
-  42 of 235 functions (17.9%) were compiled, the rest were copied from previous compilation.
-    8 functions were new in current compilation
-    9 functions had inline decision re-evaluated but remain unchanged
+  29 of 240 functions (12.1%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   SDLEngine.vcxproj -> G:\Github_Clones\SDLEngine\SDLEngine\SDLEngine\Release\SDLEngine.exe
