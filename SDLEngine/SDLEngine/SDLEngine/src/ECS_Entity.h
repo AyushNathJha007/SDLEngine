@@ -4,7 +4,12 @@
 
 #include<vector>
 #include<string>
+#include "./ECS_Component.h"
+#include "./ECS_EntityManager.h"
 using namespace std;
+
+class ECS_EntityManager;
+class ECS_Component;
 
 class ECS_Entity {
 private:
@@ -18,7 +23,17 @@ public:
 	void Update(float deltaTime);
 	void Render();
 	void Destroy();
-	bool isActive() const;
+	bool IsActive() const;
+
+	template<typename T, typename... TArgs>
+	T& AddComponent(TArgs&&... args)
+	{
+		T* newComponent(new T(std::forward<TArgs>(args)...));
+		newComponent->owner = this;
+		components.emplace_back(newComponent);
+		newComponent->Initialize();
+		return *newComponent;
+	}
 };
 
 #endif

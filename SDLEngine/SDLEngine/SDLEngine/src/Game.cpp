@@ -4,14 +4,20 @@
 #include "./Game.h"
 #include "./Constants.h"
 #include "../libs/glm/glm.hpp"
+#include "./ECS_EntityManager.h"
+#include "./Components/ECS_Transform_Component.h"
+#include "./Components/ECS_Rigidbody_Component.h"
 using namespace std;
 /*float projectile_pos_x = 0.0f;
 float projectile_pos_y = 0.0f;
 float projectile_vel_x = 10.0f;
 float projectile_vel_y =10.0f;*/
 
-glm::vec2 projectile_pos = glm::vec2(0.0f, 0.0f);
-glm::vec2 projectile_vel = glm::vec2(10.0f, 10.0f);
+ECS_EntityManager manager;
+SDL_Renderer* Game::renderer;
+
+//glm::vec2 projectile_pos = glm::vec2(0.0f, 0.0f);
+//glm::vec2 projectile_vel = glm::vec2(10.0f, 10.0f);
 
 bool Game::IsRunning() const
 {
@@ -26,6 +32,14 @@ Game::Game()
 Game::~Game()
 {
 
+}
+
+void Game::LoadLevel(int levelnum)
+{
+	ECS_Entity& newEntity(manager.AddEntity("Projectile"));
+	ECS_Rigidbody_Component rb2d = newEntity.AddComponent<ECS_Rigidbody_Component>(20, 20);
+
+	newEntity.AddComponent<ECS_Transform_Component>(0, 0, 32, 32, 1, rb2d);
 }
 
 void Game::Initialize(int win_width,int win_height)
@@ -49,6 +63,7 @@ void Game::Initialize(int win_width,int win_height)
 	}
 
 	//If everything above works alright, we can start game loop
+	LoadLevel(0);
 	this->isRunning = true;
 	return;
 }
@@ -87,7 +102,8 @@ void Game::UpdateGame()
 	this->ticksLastFrame = SDL_GetTicks();
 	/*projectile_pos_x += projectile_vel_x*deltaTime;
 	projectile_pos_y += projectile_vel_y*deltaTime;*/
-	projectile_pos += projectile_vel * deltaTime;
+	//projectile_pos += projectile_vel * deltaTime;
+	manager.Update(deltaTime);
 }
 
 void Game::Render()
@@ -95,7 +111,7 @@ void Game::Render()
 	SDL_SetRenderDrawColor(this->renderer, 25, 25, 25, 255);
 	SDL_RenderClear(this->renderer);
 
-	SDL_Rect Projectile{
+	/*SDL_Rect Projectile{
 		(int)projectile_pos.x,
 		(int)projectile_pos.y,
 		10,
@@ -103,7 +119,12 @@ void Game::Render()
 	};
 
 	SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(this->renderer, &Projectile);
+	SDL_RenderFillRect(this->renderer, &Projectile);*/
+
+	if (manager.HasNoEntities())
+		return;
+
+	manager.Render();
 
 	SDL_RenderPresent(this->renderer);
 }

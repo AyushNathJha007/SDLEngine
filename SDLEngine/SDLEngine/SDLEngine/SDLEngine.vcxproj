@@ -360,9 +360,12 @@
     <ClInclude Include="SDL2Libs\include\SDL_version.h" />
     <ClInclude Include="SDL2Libs\include\SDL_video.h" />
     <ClInclude Include="SDL2Libs\include\SDL_vulkan.h" />
+    <ClInclude Include="src\Components\ECS_Rigidbody_Component.h" />
+    <ClInclude Include="src\Components\ECS_Transform_Component.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\ECS_Component.h" />
     <ClInclude Include="src\ECS_Entity.h" />
+    <ClInclude Include="src\ECS_EntityManager.h" />
     <ClInclude Include="src\Game.h" />
   </ItemGroup>
   <ItemGroup>
@@ -586,6 +589,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="libs\imgui\imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Components\ECS_Rigidbody_Component.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Components\ECS_Transform_Component.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\ECS_Entity.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\ECS_EntityManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Game.cpp">
