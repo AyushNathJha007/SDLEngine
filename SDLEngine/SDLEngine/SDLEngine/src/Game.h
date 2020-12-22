@@ -6,6 +6,8 @@
 #include<SDL_ttf.h>
 #include<SDL_image.h>
 
+class ECS_AssetManager;
+
 class Game {
 private:
 	bool isRunning;
@@ -16,6 +18,7 @@ public:
 	Game();
 	~Game();
 	static SDL_Renderer *renderer;
+	static ECS_AssetManager* assetManager;
 	void LoadLevel(int LevelNum);
 	bool IsRunning() const;
 	void Initialize(int win_width, int win_height);

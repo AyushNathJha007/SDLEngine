@@ -361,11 +361,14 @@
     <ClInclude Include="SDL2Libs\include\SDL_video.h" />
     <ClInclude Include="SDL2Libs\include\SDL_vulkan.h" />
     <ClInclude Include="src\Components\ECS_Rigidbody_Component.h" />
+    <ClInclude Include="src\Components\ECS_Sprite_Component.h" />
     <ClInclude Include="src\Components\ECS_Transform_Component.h" />
     <ClInclude Include="src\Constants.h" />
+    <ClInclude Include="src\ECS_AssetManager.h" />
     <ClInclude Include="src\ECS_Component.h" />
     <ClInclude Include="src\ECS_Entity.h" />
     <ClInclude Include="src\ECS_EntityManager.h" />
+    <ClInclude Include="src\ECS_TextureManager.h" />
     <ClInclude Include="src\Game.h" />
   </ItemGroup>
   <ItemGroup>
@@ -594,13 +597,22 @@
     <ClCompile Include="src\Components\ECS_Rigidbody_Component.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Components\ECS_Sprite_Component.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Components\ECS_Transform_Component.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\ECS_AssetManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\ECS_Entity.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\ECS_EntityManager.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\ECS_TextureManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Game.cpp">
@@ -661,6 +673,41 @@
     <Object Include="Release\imgui_sdl.obj" />
     <Object Include="Release\imgui_widgets.obj" />
     <Object Include="Release\Main.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\images\army-group-1.png" />
+    <Image Include="assets\images\army-group-2.png" />
+    <Image Include="assets\images\army-group-3.png" />
+    <Image Include="assets\images\bandit-spritesheet.png" />
+    <Image Include="assets\images\base-landing.png" />
+    <Image Include="assets\images\base-takeoff.png" />
+    <Image Include="assets\images\bullet.png" />
+    <Image Include="assets\images\chopper-single.png" />
+    <Image Include="assets\images\chopper-spritesheet.png" />
+    <Image Include="assets\images\collision-texture.png" />
+    <Image Include="assets\images\obstacles.png" />
+    <Image Include="assets\images\radar-spritesheet.png" />
+    <Image Include="assets\images\rock-big-1.png" />
+    <Image Include="assets\images\rock-big-2.png" />
+    <Image Include="assets\images\rock-big-3.png" />
+    <Image Include="assets\images\rock-big-4.png" />
+    <Image Include="assets\images\rock-small-1.png" />
+    <Image Include="assets\images\tank-panther-left.png" />
+    <Image Include="assets\images\tank-panther-right.png" />
+    <Image Include="assets\images\tank-tiger-down.png" />
+    <Image Include="assets\images\tank-tiger-left.png" />
+    <Image Include="assets\images\tank-tiger-right.png" />
+    <Image Include="assets\images\tree-small-1.png" />
+    <Image Include="assets\images\tree-small-2.png" />
+    <Image Include="assets\images\tree-small-3.png" />
+    <Image Include="assets\images\tree-small-4.png" />
+    <Image Include="assets\images\tree-small-5.png" />
+    <Image Include="assets\images\tree-small-6.png" />
+    <Image Include="assets\images\tree-small-7.png" />
+    <Image Include="assets\images\tree-small-8.png" />
+    <Image Include="assets\images\truck-ford-down.png" />
+    <Image Include="assets\images\truck-ford-left.png" />
+    <Image Include="assets\images\truck-ford-right.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

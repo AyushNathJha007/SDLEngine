@@ -24,14 +24,14 @@ void ECS_Transform_Component::Update(float deltaTime)
 
 void ECS_Transform_Component::Render()
 {
-	SDL_Rect transformRectangle = {
+	/*SDL_Rect transformRectangle = {
 		(int)position2D.x,
 		(int)position2D.y,
 		width,
 		height
 	};
 	SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(Game::renderer, &transformRectangle);
+	SDL_RenderFillRect(Game::renderer, &transformRectangle);*/
 }
 
 

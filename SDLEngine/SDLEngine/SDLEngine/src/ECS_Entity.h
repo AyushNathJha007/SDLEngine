@@ -2,6 +2,7 @@
 #ifndef ECS_ENTITY_H
 #define ECS_ENTITY_H
 
+#include<map>
 #include<vector>
 #include<string>
 #include "./ECS_Component.h"
@@ -15,6 +16,7 @@ class ECS_Entity {
 private:
 	vector<ECS_Component*> components;
 	ECS_EntityManager &EntityManager;
+	map<const type_info*, ECS_Component*> componentID_Map;
 	bool isActive;
 public:
 	string name;
@@ -31,8 +33,15 @@ public:
 		T* newComponent(new T(std::forward<TArgs>(args)...));
 		newComponent->owner = this;
 		components.emplace_back(newComponent);
+		componentID_Map[&typeid(*newComponent)] = newComponent;
 		newComponent->Initialize();
 		return *newComponent;
+	}
+
+	template<typename T>
+	T* GetComponent()
+	{
+		return static_cast<T*>(componentID_Map[&typeid(T)]);
 	}
 };
 

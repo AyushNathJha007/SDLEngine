@@ -5,8 +5,10 @@
 #include "./Constants.h"
 #include "../libs/glm/glm.hpp"
 #include "./ECS_EntityManager.h"
+#include "./ECS_AssetManager.h"
 #include "./Components/ECS_Transform_Component.h"
 #include "./Components/ECS_Rigidbody_Component.h"
+#include "./Components/ECS_Sprite_Component.h"
 using namespace std;
 /*float projectile_pos_x = 0.0f;
 float projectile_pos_y = 0.0f;
@@ -14,6 +16,7 @@ float projectile_vel_x = 10.0f;
 float projectile_vel_y =10.0f;*/
 
 ECS_EntityManager manager;
+ECS_AssetManager* Game::assetManager = new ECS_AssetManager(&manager);
 SDL_Renderer* Game::renderer;
 
 //glm::vec2 projectile_pos = glm::vec2(0.0f, 0.0f);
@@ -36,10 +39,15 @@ Game::~Game()
 
 void Game::LoadLevel(int levelnum)
 {
-	ECS_Entity& newEntity(manager.AddEntity("Projectile"));
+	/*First, load all assets*/
+	std::string texture_filePath = "./assets/images/tank-panther-right.png";
+	assetManager->AddTexture("Tank_Image", texture_filePath);
+	/*Then, start including assets and components*/
+	ECS_Entity& newEntity(manager.AddEntity("Tank"));
 	ECS_Rigidbody_Component rb2d = newEntity.AddComponent<ECS_Rigidbody_Component>(20, 20);
 
 	newEntity.AddComponent<ECS_Transform_Component>(0, 0, 32, 32, 1, rb2d);
+	newEntity.AddComponent<ECS_Sprite_Component>("Tank_Image");
 }
 
 void Game::Initialize(int win_width,int win_height)
