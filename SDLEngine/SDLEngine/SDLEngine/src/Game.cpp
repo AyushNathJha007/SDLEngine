@@ -40,14 +40,19 @@ Game::~Game()
 void Game::LoadLevel(int levelnum)
 {
 	/*First, load all assets*/
-	std::string texture_filePath = "./assets/images/tank-panther-right.png";
-	assetManager->AddTexture("Tank_Image", texture_filePath);
+	std::string tank_texture_filePath = "./assets/images/tank-panther-right.png";
+	assetManager->AddTexture("Tank_Image", tank_texture_filePath);
+	std::string chopper_texture_filePath = "./assets/images/chopper-spritesheet.png";
+	assetManager->AddTexture("Chopper_Image", chopper_texture_filePath);
 	/*Then, start including assets and components*/
-	ECS_Entity& newEntity(manager.AddEntity("Tank"));
-	ECS_Rigidbody_Component rb2d = newEntity.AddComponent<ECS_Rigidbody_Component>(20, 20);
-
-	newEntity.AddComponent<ECS_Transform_Component>(0, 0, 32, 32, 1, rb2d);
-	newEntity.AddComponent<ECS_Sprite_Component>("Tank_Image");
+	ECS_Entity& tankEntity(manager.AddEntity("Tank"));
+	ECS_Rigidbody_Component tank_rb2d = tankEntity.AddComponent<ECS_Rigidbody_Component>(20, 20);
+	tankEntity.AddComponent<ECS_Transform_Component>(0, 0, 32, 32, 1, tank_rb2d);
+	tankEntity.AddComponent<ECS_Sprite_Component>("Tank_Image");
+	ECS_Entity& chopperEntity(manager.AddEntity("Chopper"));
+	ECS_Rigidbody_Component chopper_rb2d = chopperEntity.AddComponent<ECS_Rigidbody_Component>(0, 0);
+	chopperEntity.AddComponent<ECS_Transform_Component>(100, 200, 32, 32, 1, chopper_rb2d);
+	chopperEntity.AddComponent<ECS_Sprite_Component>("Chopper_Image",90,2,true,false);
 }
 
 void Game::Initialize(int win_width,int win_height)

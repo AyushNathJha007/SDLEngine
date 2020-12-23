@@ -360,6 +360,7 @@
     <ClInclude Include="SDL2Libs\include\SDL_version.h" />
     <ClInclude Include="SDL2Libs\include\SDL_video.h" />
     <ClInclude Include="SDL2Libs\include\SDL_vulkan.h" />
+    <ClInclude Include="src\Components\ECS_Animation.h" />
     <ClInclude Include="src\Components\ECS_Rigidbody_Component.h" />
     <ClInclude Include="src\Components\ECS_Sprite_Component.h" />
     <ClInclude Include="src\Components\ECS_Transform_Component.h" />
@@ -592,6 +593,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="libs\imgui\imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Components\ECS_Animation.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Components\ECS_Rigidbody_Component.cpp">
