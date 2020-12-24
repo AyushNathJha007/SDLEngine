@@ -2,6 +2,9 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include<string>
+#include<map>
+
 //Window width
 const unsigned int WINDOW_WIDTH = 800;
 
@@ -13,5 +16,15 @@ const unsigned int FPS = 60;
 
 //Target Frame Rate
 const unsigned int TARGET_FRAME_TIME = 1000 / FPS;
+
+//SDLKeyStringCodes
+const std::map<std::string,std::string> SDLKeyStringCode=
+{
+	{"Up","1073741906"},
+	{"Down","1073741905"},
+	{"Left","1073741904"},
+	{"Right","1073741903"},
+	{"Space","32"}
+};
 
 #endif

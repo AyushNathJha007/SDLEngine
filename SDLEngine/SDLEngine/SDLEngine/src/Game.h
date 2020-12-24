@@ -19,6 +19,7 @@ public:
 	~Game();
 	static SDL_Renderer *renderer;
 	static ECS_AssetManager* assetManager;
+	static SDL_Event event;
 	void LoadLevel(int LevelNum);
 	bool IsRunning() const;
 	void Initialize(int win_width, int win_height);

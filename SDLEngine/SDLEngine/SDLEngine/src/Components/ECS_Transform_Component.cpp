@@ -1,7 +1,12 @@
-#include "ECS_Transform_Component.h"
-#include "ECS_Rigidbody_Component.h"
+#include "./ECS_Transform_Component.h"
+#include "./ECS_Rigidbody_Component.h"
 #include "../../SDL2Libs/include/SDL.h"
 #include "../Game.h"
+
+ECS_Transform_Component::ECS_Transform_Component()
+{
+
+}
 
 ECS_Transform_Component::ECS_Transform_Component(int posX, int posY, int w, int h, int s, ECS_Rigidbody_Component rigidbody2D)
 {

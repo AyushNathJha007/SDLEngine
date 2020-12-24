@@ -10,11 +10,14 @@ class ECS_Transform_Component :public ECS_Component
 {
 public:
 	glm::vec2 position2D;
+	//RB test
+	//ECS_Rigidbody_Component rb2d;
 	glm::vec2 velocity2D;
 	int width;
 	int height;
 	int scale;
 
+	ECS_Transform_Component();
 	ECS_Transform_Component(int posX, int posY, int w, int h, int s, ECS_Rigidbody_Component rigidbody2D);
 
 	void Initialize() override;

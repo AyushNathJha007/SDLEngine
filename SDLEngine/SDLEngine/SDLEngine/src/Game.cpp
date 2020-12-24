@@ -9,6 +9,7 @@
 #include "./Components/ECS_Transform_Component.h"
 #include "./Components/ECS_Rigidbody_Component.h"
 #include "./Components/ECS_Sprite_Component.h"
+#include "./Components//ECS_InputHandler_Component.h"
 using namespace std;
 /*float projectile_pos_x = 0.0f;
 float projectile_pos_y = 0.0f;
@@ -18,6 +19,7 @@ float projectile_vel_y =10.0f;*/
 ECS_EntityManager manager;
 ECS_AssetManager* Game::assetManager = new ECS_AssetManager(&manager);
 SDL_Renderer* Game::renderer;
+SDL_Event Game::event;
 
 //glm::vec2 projectile_pos = glm::vec2(0.0f, 0.0f);
 //glm::vec2 projectile_vel = glm::vec2(10.0f, 10.0f);
@@ -49,10 +51,18 @@ void Game::LoadLevel(int levelnum)
 	ECS_Rigidbody_Component tank_rb2d = tankEntity.AddComponent<ECS_Rigidbody_Component>(20, 20);
 	tankEntity.AddComponent<ECS_Transform_Component>(0, 0, 32, 32, 1, tank_rb2d);
 	tankEntity.AddComponent<ECS_Sprite_Component>("Tank_Image");
+
+	std::map<std::string, std::string> keyboardMapping, mouseMapping, gamepadMapping;
+	keyboardMapping.emplace("Up", "MoveUp");
+	keyboardMapping.emplace("Down", "MoveDown");
+	keyboardMapping.emplace("Left", "MoveLeft");
+	keyboardMapping.emplace("Right", "MoveRight");
+	keyboardMapping.emplace("Space", "Shoot");
 	ECS_Entity& chopperEntity(manager.AddEntity("Chopper"));
 	ECS_Rigidbody_Component chopper_rb2d = chopperEntity.AddComponent<ECS_Rigidbody_Component>(0, 0);
 	chopperEntity.AddComponent<ECS_Transform_Component>(100, 200, 32, 32, 1, chopper_rb2d);
 	chopperEntity.AddComponent<ECS_Sprite_Component>("Chopper_Image",90,2,true,false);
+	chopperEntity.AddComponent<ECS_InputHandler_Component>(keyboardMapping, mouseMapping, gamepadMapping);
 }
 
 void Game::Initialize(int win_width,int win_height)
@@ -83,7 +93,7 @@ void Game::Initialize(int win_width,int win_height)
 
 void Game::InputProcessing()
 {
-	SDL_Event event;
+	//SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type)
 	{

@@ -1071,6 +1071,9 @@
     <ClInclude Include="src\Components\ECS_Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\ECS_InputHandler_Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="libs\glm\detail\func_common.inl">
@@ -1587,6 +1590,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Components\ECS_Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\ECS_InputHandler_Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

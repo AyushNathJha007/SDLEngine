@@ -17,17 +17,17 @@ ECS_Sprite_Component::ECS_Sprite_Component(std::string textureID, int animSpeed,
 
 	if (hasDirections)
 	{
-		ECS_Animation downAnim = ECS_Animation(0, numberOfFrames, animSpeed);
+		ECS_Animation upAnim = ECS_Animation(0, numberOfFrames, animSpeed);
 		ECS_Animation rightAnim = ECS_Animation(1, numberOfFrames, animSpeed);
-		ECS_Animation leftAnim = ECS_Animation(2, numberOfFrames, animSpeed);
-		ECS_Animation upAnim = ECS_Animation(3, numberOfFrames, animSpeed);
+		ECS_Animation downAnim = ECS_Animation(2, numberOfFrames, animSpeed);
+		ECS_Animation leftAnim = ECS_Animation(3, numberOfFrames, animSpeed);
 		animations.emplace("DownAnimation", downAnim);
 		animations.emplace("RightAnimation", rightAnim);
-		animations.emplace("leftAnimation", leftAnim);
+		animations.emplace("LeftAnimation", leftAnim);
 		animations.emplace("UpAnimation", upAnim);
 		//The starting animation index
 		this->animationIndex = 0;
-		this->currentAnimationName = "DownAnimation";
+		this->currentAnimationName = "UpAnimation";
 
 	}
 	else
