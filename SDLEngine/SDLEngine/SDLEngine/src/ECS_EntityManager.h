@@ -16,8 +16,9 @@ public:
 	void Update(float deltaTime);
 	void Render();
 	bool HasNoEntities();
-	ECS_Entity& AddEntity(std::string name);
+	ECS_Entity& AddEntity(std::string name, Layer layer);
 	std::vector<ECS_Entity*> GetEntities() const;
+	std::vector<ECS_Entity*> GetEntitiesByLayer(Layer layer) const;
 	unsigned int GetEntityCount();
 	void ClearData();
 

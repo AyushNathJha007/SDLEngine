@@ -5,6 +5,7 @@
 #include<SDL.h>
 #include<SDL_ttf.h>
 #include<SDL_image.h>
+#include "ECS_AssetManager.h"
 
 class ECS_AssetManager;
 
@@ -20,6 +21,8 @@ public:
 	static SDL_Renderer *renderer;
 	static ECS_AssetManager* assetManager;
 	static SDL_Event event;
+	//Adding a camera component now->
+	static SDL_Rect camera;
 	void LoadLevel(int LevelNum);
 	bool IsRunning() const;
 	void Initialize(int win_width, int win_height);
@@ -27,6 +30,7 @@ public:
 	void UpdateGame();
 	void Render();
 	void Destroy();
+	void HandleCameraUpdate();
 };
 
 #endif

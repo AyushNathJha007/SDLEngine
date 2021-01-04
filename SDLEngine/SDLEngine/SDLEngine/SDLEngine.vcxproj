@@ -364,6 +364,7 @@
     <ClInclude Include="src\Components\ECS_InputHandler_Component.h" />
     <ClInclude Include="src\Components\ECS_Rigidbody_Component.h" />
     <ClInclude Include="src\Components\ECS_Sprite_Component.h" />
+    <ClInclude Include="src\Components\ECS_Tile_Component.h" />
     <ClInclude Include="src\Components\ECS_Transform_Component.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\ECS_AssetManager.h" />
@@ -372,8 +373,10 @@
     <ClInclude Include="src\ECS_EntityManager.h" />
     <ClInclude Include="src\ECS_TextureManager.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Map.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\tilemaps\jungle.map" />
     <None Include="libFLAC-8.dll" />
     <None Include="libfreetype-6.dll" />
     <None Include="libjpeg-9.dll" />
@@ -608,6 +611,9 @@
     <ClCompile Include="src\Components\ECS_Sprite_Component.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Components\ECS_Tile_Component.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Components\ECS_Transform_Component.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -627,6 +633,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Main.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Map.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
@@ -716,6 +725,10 @@
     <Image Include="assets\images\truck-ford-down.png" />
     <Image Include="assets\images\truck-ford-left.png" />
     <Image Include="assets\images\truck-ford-right.png" />
+    <Image Include="assets\tilemaps\jungle copy.png" />
+    <Image Include="assets\tilemaps\jungle-emptysea.png" />
+    <Image Include="assets\tilemaps\jungle-night.png" />
+    <Image Include="assets\tilemaps\jungle.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

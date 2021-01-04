@@ -7,7 +7,7 @@ ECS_Entity::ECS_Entity(ECS_EntityManager & EntityManager) : EntityManager(Entity
 	this->isActive = true;
 }
 
-ECS_Entity::ECS_Entity(ECS_EntityManager & EntityManager, std::string name):EntityManager(EntityManager),name(name)
+ECS_Entity::ECS_Entity(ECS_EntityManager & EntityManager, std::string name,Layer layer):EntityManager(EntityManager),name(name),layer(layer)
 {
 	this->isActive = true;
 }

@@ -74,8 +74,8 @@ void ECS_Sprite_Component::Update(float deltaTime)
 	}
 	sourceRect.y = animationIndex * transform->height;
 	//Animation part ends
-	destRect.x = (int)transform->position2D.x;
-	destRect.y = (int)transform->position2D.y;
+	destRect.x = (int)transform->position2D.x-(isFixedOnScreen?0:Game::camera.x);
+	destRect.y = (int)transform->position2D.y- (isFixedOnScreen ? 0 : Game::camera.y);
 	destRect.w = transform->width*transform->scale;
 	destRect.h= transform->height*transform->scale;
 }

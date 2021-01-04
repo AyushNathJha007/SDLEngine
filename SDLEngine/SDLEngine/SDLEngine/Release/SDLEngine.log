@@ -1,4 +1,14 @@
-﻿  ECS_InputHandler_Component.cpp
+﻿  Game.cpp
+g:\github_clones\sdlengine\sdlengine\sdlengine\sdlengine\src\game.cpp(175): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+g:\github_clones\sdlengine\sdlengine\sdlengine\sdlengine\src\game.cpp(176): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
 Release\glm.obj : warning LNK4042: object specified more than once; extras ignored
 Release\imgui.obj : warning LNK4042: object specified more than once; extras ignored
 Release\imgui_demo.obj : warning LNK4042: object specified more than once; extras ignored
@@ -7,7 +17,7 @@ Release\imgui_sdl.obj : warning LNK4042: object specified more than once; extras
 Release\imgui_widgets.obj : warning LNK4042: object specified more than once; extras ignored
 Release\Main.obj : warning LNK4042: object specified more than once; extras ignored
   Generating code
-  1 of 1043 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 1180 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

@@ -5,6 +5,7 @@
 #include<map>
 #include<vector>
 #include<string>
+#include "./Constants.h"
 #include "./ECS_Component.h"
 #include "./ECS_EntityManager.h"
 using namespace std;
@@ -20,8 +21,9 @@ private:
 	bool isActive;
 public:
 	string name;
+	Layer layer;
 	ECS_Entity(ECS_EntityManager &EntityManager);
-	ECS_Entity(ECS_EntityManager &EntityManager,string name);
+	ECS_Entity(ECS_EntityManager &EntityManager,string name,Layer layer);
 	void Update(float deltaTime);
 	void Render();
 	void Destroy();

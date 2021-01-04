@@ -10,16 +10,22 @@
 #include "./Components/ECS_Rigidbody_Component.h"
 #include "./Components/ECS_Sprite_Component.h"
 #include "./Components//ECS_InputHandler_Component.h"
+#include "./Map.h"
 using namespace std;
 /*float projectile_pos_x = 0.0f;
 float projectile_pos_y = 0.0f;
 float projectile_vel_x = 10.0f;
 float projectile_vel_y =10.0f;*/
 
+//Getting player transform for updating camera
+ECS_Transform_Component* playerTransform;
+
 ECS_EntityManager manager;
 ECS_AssetManager* Game::assetManager = new ECS_AssetManager(&manager);
 SDL_Renderer* Game::renderer;
 SDL_Event Game::event;
+SDL_Rect Game::camera;
+Map* mapp;
 
 //glm::vec2 projectile_pos = glm::vec2(0.0f, 0.0f);
 //glm::vec2 projectile_vel = glm::vec2(10.0f, 10.0f);
@@ -39,6 +45,8 @@ Game::~Game()
 
 }
 
+
+ECS_Entity& chopperEntity(manager.AddEntity("Chopper", PLAYER_LAYER));
 void Game::LoadLevel(int levelnum)
 {
 	/*First, load all assets*/
@@ -46,8 +54,14 @@ void Game::LoadLevel(int levelnum)
 	assetManager->AddTexture("Tank_Image", tank_texture_filePath);
 	std::string chopper_texture_filePath = "./assets/images/chopper-spritesheet.png";
 	assetManager->AddTexture("Chopper_Image", chopper_texture_filePath);
+	std::string jungle_tileset_filePath = "./assets/tilemaps/jungle.png";
+	assetManager->AddTexture("jungleTiles", jungle_tileset_filePath);
+
+	mapp = new Map("jungleTiles", 2, 32);
+	mapp->Map_Load("./assets/tilemaps/jungle.map", 25, 20);
+
 	/*Then, start including assets and components*/
-	ECS_Entity& tankEntity(manager.AddEntity("Tank"));
+	ECS_Entity& tankEntity(manager.AddEntity("Tank",ENEMY_LAYER));
 	ECS_Rigidbody_Component tank_rb2d = tankEntity.AddComponent<ECS_Rigidbody_Component>(20, 20);
 	tankEntity.AddComponent<ECS_Transform_Component>(0, 0, 32, 32, 1, tank_rb2d);
 	tankEntity.AddComponent<ECS_Sprite_Component>("Tank_Image");
@@ -58,9 +72,11 @@ void Game::LoadLevel(int levelnum)
 	keyboardMapping.emplace("Left", "MoveLeft");
 	keyboardMapping.emplace("Right", "MoveRight");
 	keyboardMapping.emplace("Space", "Shoot");
-	ECS_Entity& chopperEntity(manager.AddEntity("Chopper"));
+	
+	
 	ECS_Rigidbody_Component chopper_rb2d = chopperEntity.AddComponent<ECS_Rigidbody_Component>(0, 0);
 	chopperEntity.AddComponent<ECS_Transform_Component>(100, 200, 32, 32, 1, chopper_rb2d);
+	//playerTransform = chopperEntity.GetComponent<ECS_Transform_Component>();
 	chopperEntity.AddComponent<ECS_Sprite_Component>("Chopper_Image",90,2,true,false);
 	chopperEntity.AddComponent<ECS_InputHandler_Component>(keyboardMapping, mouseMapping, gamepadMapping);
 }
@@ -127,6 +143,7 @@ void Game::UpdateGame()
 	projectile_pos_y += projectile_vel_y*deltaTime;*/
 	//projectile_pos += projectile_vel * deltaTime;
 	manager.Update(deltaTime);
+	HandleCameraUpdate();
 }
 
 void Game::Render()
@@ -150,6 +167,20 @@ void Game::Render()
 	manager.Render();
 
 	SDL_RenderPresent(this->renderer);
+}
+
+void Game::HandleCameraUpdate()
+{
+	playerTransform = chopperEntity.GetComponent<ECS_Transform_Component>();
+	camera.x = playerTransform->position2D.x - (WINDOW_WIDTH / 2);
+	camera.y= playerTransform->position2D.y - (WINDOW_HEIGHT / 2);
+	
+	//Clamping camera view
+	camera.x = camera.x < 0 ? 0 : camera.x;
+	camera.y = camera.y < 0 ? 0 : camera.y;
+	camera.x = camera.x > camera.w ? camera.w : camera.x;
+	camera.y = camera.y > camera.h ? camera.h : camera.y;
+
 }
 
 void Game::Destroy()

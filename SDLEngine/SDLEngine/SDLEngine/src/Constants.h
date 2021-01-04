@@ -27,4 +27,17 @@ const std::map<std::string,std::string> SDLKeyStringCode=
 	{"Space","32"}
 };
 
+
+//Add Different layers here
+enum Layer {
+	TILEMAP_LAYER = 0,
+	VEGETATION_LAYER = 1,
+	ENEMY_LAYER = 2,
+	PLAYER_LAYER = 3,
+	PROJECTILE_LAYER=4,
+	UI_LAYER=5
+};
+
+const unsigned int NUM_LAYERS = 6;
+
 #endif
