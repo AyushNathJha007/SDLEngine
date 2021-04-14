@@ -10,6 +10,8 @@
 #include "./Components/ECS_Rigidbody_Component.h"
 #include "./Components/ECS_Sprite_Component.h"
 #include "./Components//ECS_InputHandler_Component.h"
+#include "./Components//ECS_Collider_Component.h"
+#include "./Components/ECS_UI_TextComponent.h"
 #include "./Map.h"
 using namespace std;
 /*float projectile_pos_x = 0.0f;
@@ -24,7 +26,7 @@ ECS_EntityManager manager;
 ECS_AssetManager* Game::assetManager = new ECS_AssetManager(&manager);
 SDL_Renderer* Game::renderer;
 SDL_Event Game::event;
-SDL_Rect Game::camera;
+SDL_Rect Game::camera = { 0,0,WINDOW_WIDTH,WINDOW_HEIGHT };
 Map* mapp;
 
 //glm::vec2 projectile_pos = glm::vec2(0.0f, 0.0f);
@@ -56,15 +58,18 @@ void Game::LoadLevel(int levelnum)
 	assetManager->AddTexture("Chopper_Image", chopper_texture_filePath);
 	std::string jungle_tileset_filePath = "./assets/tilemaps/jungle.png";
 	assetManager->AddTexture("jungleTiles", jungle_tileset_filePath);
+	std::string font_filePath = "./assets/fonts/charriot.ttf";
+	assetManager->AddFont("charriotFont", font_filePath,14);
 
 	mapp = new Map("jungleTiles", 2, 32);
 	mapp->Map_Load("./assets/tilemaps/jungle.map", 25, 20);
 
 	/*Then, start including assets and components*/
 	ECS_Entity& tankEntity(manager.AddEntity("Tank",ENEMY_LAYER));
-	ECS_Rigidbody_Component tank_rb2d = tankEntity.AddComponent<ECS_Rigidbody_Component>(20, 20);
+	ECS_Rigidbody_Component tank_rb2d = tankEntity.AddComponent<ECS_Rigidbody_Component>(5, 5);
 	tankEntity.AddComponent<ECS_Transform_Component>(0, 0, 32, 32, 1, tank_rb2d);
 	tankEntity.AddComponent<ECS_Sprite_Component>("Tank_Image");
+	tankEntity.AddComponent<ECS_Collider_Component>("enemy", 0, 0, 32, 32);
 
 	std::map<std::string, std::string> keyboardMapping, mouseMapping, gamepadMapping;
 	keyboardMapping.emplace("Up", "MoveUp");
@@ -79,6 +84,11 @@ void Game::LoadLevel(int levelnum)
 	//playerTransform = chopperEntity.GetComponent<ECS_Transform_Component>();
 	chopperEntity.AddComponent<ECS_Sprite_Component>("Chopper_Image",90,2,true,false);
 	chopperEntity.AddComponent<ECS_InputHandler_Component>(keyboardMapping, mouseMapping, gamepadMapping);
+	chopperEntity.AddComponent<ECS_Collider_Component>("player", 100, 200, 32, 32);
+
+	ECS_Entity& levelLabelUI(manager.AddEntity("LevelLabel", UI_LAYER));
+	SDL_Color WHITE = { 255,255,255,255 };
+	levelLabelUI.AddComponent<ECS_UI_TextComponent>(10, 10, "First Level", "charriotFont", WHITE);
 }
 
 void Game::Initialize(int win_width,int win_height)
@@ -86,6 +96,11 @@ void Game::Initialize(int win_width,int win_height)
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		cerr << "Error: SDL Initialization Failed!" << endl;
+		return;
+	}
+	if (TTF_Init() != 0)
+	{
+		cerr << "Error: TTF Initialization Failed!" << endl;
 		return;
 	}
 	this->window = SDL_CreateWindow(NULL, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, win_width, win_height, SDL_WINDOW_BORDERLESS);
@@ -144,6 +159,7 @@ void Game::UpdateGame()
 	//projectile_pos += projectile_vel * deltaTime;
 	manager.Update(deltaTime);
 	HandleCameraUpdate();
+	CheckCollisions();
 }
 
 void Game::Render()
@@ -181,6 +197,16 @@ void Game::HandleCameraUpdate()
 	camera.x = camera.x > camera.w ? camera.w : camera.x;
 	camera.y = camera.y > camera.h ? camera.h : camera.y;
 
+}
+
+void Game::CheckCollisions()
+{
+	std::string collisionTagType=manager.CheckEntityCollisions(chopperEntity);
+	if (collisionTagType.compare("enemy")==0)
+	{
+		
+		isRunning = false;
+	}
 }
 
 void Game::Destroy()

@@ -19,6 +19,7 @@ public:
 	ECS_Entity& AddEntity(std::string name, Layer layer);
 	std::vector<ECS_Entity*> GetEntities() const;
 	std::vector<ECS_Entity*> GetEntitiesByLayer(Layer layer) const;
+	std::string CheckEntityCollisions(ECS_Entity& entity) const;
 	unsigned int GetEntityCount();
 	void ClearData();
 

@@ -31,6 +31,7 @@ public:
 	void Render();
 	void Destroy();
 	void HandleCameraUpdate();
+	void CheckCollisions();
 };
 
 #endif

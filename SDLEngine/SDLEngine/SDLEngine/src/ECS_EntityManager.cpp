@@ -1,4 +1,6 @@
 #include "ECS_EntityManager.h"
+#include "Collision.h"
+#include "./Components/ECS_Collider_Component.h"
 
 
 void ECS_EntityManager::Update(float deltaTime)
@@ -52,6 +54,24 @@ std::vector<ECS_Entity*> ECS_EntityManager::GetEntitiesByLayer(Layer layer) cons
 			layerEntities.emplace_back(entity);
 	}
 	return layerEntities;
+}
+
+std::string ECS_EntityManager::CheckEntityCollisions(ECS_Entity & entity) const
+{
+	ECS_Collider_Component* myCollider = entity.GetComponent<ECS_Collider_Component>();
+	for (auto& entities : EntityList)
+	{
+		if (entities->name.compare(entity.name) != 0&&entities->name.compare("Tiles")!=0)
+		{
+			if (entities->HasComponent<ECS_Collider_Component>())
+			{
+				ECS_Collider_Component* otherCollider = entities->GetComponent<ECS_Collider_Component>();
+				if (Collision::CheckCollisonAABB(myCollider->collider, otherCollider->collider))
+					return otherCollider->colliderTag;
+			}
+		}
+	}
+	return std::string();
 }
 
 

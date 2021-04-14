@@ -45,6 +45,12 @@ public:
 	{
 		return static_cast<T*>(componentID_Map[&typeid(T)]);
 	}
+
+	template<typename T>
+	bool HasComponent()
+	{
+		return componentID_Map.count(&typeid(T));
+	}
 };
 
 #endif
